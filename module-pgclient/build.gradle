@@ -7,15 +7,13 @@ ext {
 }
 
 dependencies {
+    implementation project(':module-core')
+    implementation project(':common-kafka')
+    implementation project(':common-redis')
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
 
-    implementation 'org.springframework.kafka:spring-kafka'
-
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-
-    testImplementation 'org.springframework.kafka:spring-kafka-test'
     testImplementation 'io.projectreactor:reactor-test'
 
 }

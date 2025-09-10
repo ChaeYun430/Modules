@@ -17,38 +17,5 @@ spring:
     show-sql: true
     database-platform: org.hibernate.dialect.MariaDBDialect
 
-  data:
-    redis:
-      timeout: 5000ms
-      cluster:
-        nodes:
-          - 172.28.141.159:7003
-
-  kafka:
-    bootstrap-servers: localhost:9092
-    consumer:
-      group-id: payment-group
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-    listener:
-      ack-mode: record
-
-
 server:
   port: 8083
-
-payment:
-  kafka:
-    group-id: payment-group
-
-order:
-  kafka:
-    group-id: order-group
-
-inventory:
-  kafka:
-    group-id: inventory-group
