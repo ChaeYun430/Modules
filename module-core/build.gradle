@@ -1,0 +1,14 @@
+bootJar { enabled = false }
+jar { enabled = true }
+
+dependencies {
+
+}
+
+
+
+//순수 Java JAR 빌드
+//소스 클래스 + 리소스만 포함
+//Spring Boot 실행용 main class, dependency는 포함 안 함
+//실행 불가 (java -jar xxx.jar 하면 에러)
+//보통 **라이브러리 모듈(common 등)**에서 사용

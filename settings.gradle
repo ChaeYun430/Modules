@@ -1,0 +1,9 @@
+rootProject.name = 'module'
+
+include("module-core")
+include("module-api")
+include("module-user")
+include("module-order")
+include("module-payment")
+include("module-pgclient")
+include("module-inventory")

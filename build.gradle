@@ -1,0 +1,55 @@
+plugins {
+    id 'java'
+    id 'java-library'
+    id 'org.springframework.boot' version '3.5.5' apply(false)
+    id 'io.spring.dependency-management' version '1.1.7' apply(false)
+}
+
+allprojects {
+    group = 'com.fhk.module'
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = '17'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+subprojects { // setting.gradle에서 include된 모든 프로젝트에 공통적으로 적용할 설정
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'org.springframework.boot'
+
+    repositories {
+        mavenCentral()
+    }
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter'
+        implementation 'org.modelmapper:modelmapper:3.1.0'
+
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        testCompileOnly 'org.projectlombok:lombok'
+        testAnnotationProcessor 'org.projectlombok:lombok'
+
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    }
+
+}
+// --- plugins ---
+//Gradle에서 plugins {} 블록은 빌드 과정에서 사용할 플러그인 선언
+//플러그인은 미리 정의된 task 집합 + DSL 확장을 제공
+
+//java :  자바 컴파일/테스트/JAR 기본 task 추가
+//java-library : api/implementation 구분 가능 (라이브러리 모듈에 유용)

@@ -1,0 +1,45 @@
+spring:
+
+  application:
+    name: module-order
+
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/orderdb
+    name: finpulse
+    password: finpulse
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+    database-platform: org.hibernate.dialect.MariaDBDialect
+
+  data:
+    redis:
+      timeout: 5000ms
+      cluster:
+        nodes:
+          - 172.28.141.159:7000
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: order-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      enable-auto-commit: false
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      transaction-id-prefix:
+    listener:
+      ack-mode: record
+      concurrency: 3
+
+server:
+  port: 8081
