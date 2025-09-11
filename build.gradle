@@ -46,6 +46,7 @@ subprojects { // setting.gradle에서 include된 모든 프로젝트에 공통�
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     }
 
+
 }
 // --- plugins ---
 //Gradle에서 plugins {} 블록은 빌드 과정에서 사용할 플러그인 선언

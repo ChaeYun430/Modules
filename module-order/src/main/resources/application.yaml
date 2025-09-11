@@ -17,13 +17,10 @@ spring:
         format_sql: true
     show-sql: true
     database-platform: org.hibernate.dialect.MariaDBDialect
-
-  data:
-    redis:
-      timeout: 5000ms
-      cluster:
-        nodes:
-          - 172.28.141.159:7000
+  main:
+    allow-bean-definition-overriding: true
 
 server:
   port: 8081
+
+

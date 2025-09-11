@@ -1,4 +1,12 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.5.5' apply(false)
+}
+
+
 dependencies {
+
     implementation 'org.springframework.kafka:spring-kafka'
     testImplementation 'org.springframework.kafka:spring-kafka-test'
+
 }

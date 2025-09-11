@@ -1,4 +1,4 @@
-package com.fhk.module;
+package com.fhk.module.event;
 
 import org.springframework.stereotype.Component;
 

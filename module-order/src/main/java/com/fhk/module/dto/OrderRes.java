@@ -1,4 +1,4 @@
-package com.fhk.module;
+package com.fhk.module.dto;
 
 
 public class OrderRes {

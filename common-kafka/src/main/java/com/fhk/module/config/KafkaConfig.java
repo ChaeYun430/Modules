@@ -3,17 +3,25 @@ package com.fhk.module.config;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.config.TopicConfig;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.kafka.annotation.EnableKafka;
+import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.*;
+import org.springframework.kafka.listener.ContainerProperties;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Configuration
+@EnableKafka
+//@KafkaListener가 붙은 메서드를 Spring이 스캔하고, 백그라운드 Kafka 컨슈머 컨테이너를 생성하도록함.
+//Listener Container가 자동으로 Kafka 브로커와 연결됨
 public class KafkaConfig {
 
     //이름은 기본적으로 메서드명(producerFactory)이 Bean 이름
@@ -31,21 +39,44 @@ public class KafkaConfig {
     //KafkaTemplate Bean 생성 시 생성자 파라미터로 ProducerFactory를 주입
     //Spring이 컨테이너에서 ProducerFactory<String, Object> Bean을 찾아 자동으로 넣어줌
     @Bean
+    @ConditionalOnMissingBean
     public KafkaTemplate<String, Object> kafkaTemplate(ProducerFactory<String, Object> factory) {
         return new KafkaTemplate<>(factory);
     }
 
+
+    // Consumer → @KafkaListener
+    //Spring은 ConcurrentKafkaListenerContainerFactory를 통해 Listener를 관리
+    //트랜잭션, ack 모드, concurrency 설정 등 적용 가능
     @Bean
-    public NewTopic orderTopic() {
-        return TopicBuilder.name("order-topic")
-                .partitions(3)
-                .replicas(2)
-                .config(
-                        TopicConfig.RETENTION_MS_CONFIG,
-                        String.valueOf(7 * 24 * 60 * 60 * 1000L)
-                )
-                .build();
+    @ConditionalOnMissingBean
+    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory(
+            ConsumerFactory<String, String> consumerFactory) {
+        ConcurrentKafkaListenerContainerFactory<String, String> factory =
+                new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(consumerFactory);
+        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
+        factory.setConcurrency(3);
+        return factory;
     }
+
+
+    @Bean
+    public List<NewTopic> topics() {
+        return List.of(
+
+                TopicBuilder.name("order-topic").partitions(3).replicas(1)
+                        .config(
+                        TopicConfig.RETENTION_MS_CONFIG,
+                        String.valueOf(7 * 24 * 60 * 60 * 1000L)).build(),
+                TopicBuilder.name("payment-topic").partitions(3).replicas(1).build(),
+                TopicBuilder.name("accounting-topic").partitions(3).replicas(1).build(),
+                TopicBuilder.name("notification-topic").partitions(3).replicas(1).build()
+
+        );
+    }
+
+
 }
     //- 일반적으로 간단한 설정은 yaml 파일을 사용하고, 복잡한 로직이나 타입 안정성이 중요한 설정은 Java Configuration을 사용
 

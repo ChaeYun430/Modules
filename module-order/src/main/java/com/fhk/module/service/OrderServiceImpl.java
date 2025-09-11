@@ -1,9 +1,6 @@
-package com.fhk.module;
+package com.fhk.module.service;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.kafka.clients.producer.Partitioner;
-import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.annotation.TopicPartition;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
