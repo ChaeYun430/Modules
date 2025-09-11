@@ -9,6 +9,11 @@ ext {
 dependencies {
     implementation project(':module-core')
     implementation project(':common-kafka')
+    implementation project(':common-redis')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    testImplementation 'io.projectreactor:reactor-test'
 
     //Jar, 클래스, 리소스, transitve 의존성까지 한 번에 가져오는 것
 
@@ -21,6 +26,7 @@ dependencies {
             "jakarta.annotation:jakarta.annotation-api",
             "com.querydsl:querydsl-apt:${queryDslVersion}:jakarta"
     )
+
 }
 
 tasks.named('test') {

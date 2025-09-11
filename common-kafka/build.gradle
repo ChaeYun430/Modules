@@ -1,12 +1,14 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.5.5' apply(false)
 }
+
+bootJar { enabled = false }
+jar { enabled = true }
 
 
 dependencies {
 
-    implementation 'org.springframework.kafka:spring-kafka'
+    api 'org.springframework.kafka:spring-kafka'
     testImplementation 'org.springframework.kafka:spring-kafka-test'
 
 }
