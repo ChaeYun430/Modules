@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fhk.module.domain.OrderEntity;
 import com.fhk.module.domain.OrderRepository;
 import com.fhk.module.dto.OrderReq;
+import com.fhk.module.dto.OrderRes;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -24,17 +25,17 @@ public class OrderServiceImpl implements OrderService {
 
     //주문 저장 & 큐 등록
     @Transactional
-    public void createOrder(OrderReq orderReq) throws JsonProcessingException {
+    public OrderRes createOrder(OrderReq orderReq) throws JsonProcessingException {
 
-        OrderEntity savedOder = orderRepository.save(modelMapper.map(orderReq, OrderEntity.class));
+        OrderEntity savedOrder = orderRepository.save(modelMapper.map(orderReq, OrderEntity.class));
         orderRepository.flush();
         //JPA에서 save() 후 엔티티는 영속 상태(Managed)로 유지
         //flush()를 호출하면 DB에 즉시 insert/update 쿼리 실행 → DB-generated 값(auto-increment ID 등)도 엔티티에 반영
         //즉, 엔티티와 DB 값이 동기화
-        Long orderId = savedOder.getOrderId();
-        String orderJson = objectMapper.writeValueAsString(savedOder);
-        redisTemplate.opsForList().rightPush("orderId:"+orderId, orderJson);
-        // 현재는
+        String orderJson = objectMapper.writeValueAsString(savedOrder);
+        redisTemplate.opsForList().rightPush("orderQueue", orderJson);
+
+        return  modelMapper.map(savedOrder, OrderRes.class);
     }
 
 

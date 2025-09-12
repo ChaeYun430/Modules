@@ -22,7 +22,7 @@ public class UserEntity {
         private String username;
         private String email;
 
-        @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-        private List<Order> orders; // Redis 저장용으로는 제외
+       // @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+       // private List<Order> orders; // Redis 저장용으로는 제외
 
 }

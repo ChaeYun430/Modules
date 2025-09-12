@@ -1,17 +1,14 @@
-plugins {
-    id 'org.springframework.boot' version '3.5.5'
-}
 
 dependencies {
-    implementation project(':module-core')
+    //Jar, 클래스, 리소스, transitve 의존성까지 한 번에 가져오는 것
     implementation project(':common-kafka')
     implementation project(':common-redis')
     implementation project(':common-jpa')
 
+    implementation project(':module-core')
+
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
-
-    //Jar, 클래스, 리소스, transitve 의존성까지 한 번에 가져오는 것
-
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 }
