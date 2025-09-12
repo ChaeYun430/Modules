@@ -4,10 +4,6 @@ spring:
   main:
     allow-bean-definition-overriding: true
 
-batch:
-    size: 5
-    interval-ms: 5000
-
 server:
   port: 8081
 

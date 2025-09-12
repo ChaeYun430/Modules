@@ -8,4 +8,9 @@ import lombok.Getter;
 public class PaymentMessage {
 
 
+    private String orderId;
+
+    private long amount;
+
+
 }
