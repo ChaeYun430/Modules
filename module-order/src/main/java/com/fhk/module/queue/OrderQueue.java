@@ -2,21 +2,28 @@ package com.fhk.module.queue;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fhk.module.RedisConfig;
 import com.fhk.module.dto.OrderReq;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Import;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
 @Component
 @RequiredArgsConstructor
+@Import(RedisConfig.class)
 public class OrderQueue {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private final RestTemplate restTemplate;
+    private final RedisTemplate<String, String> redisTemplate;
 
     public void batchOrder(OrderReq orderReq) throws JsonProcessingException {
 
         String orderJson = objectMapper.writeValueAsString(orderReq);
-        redisTemplate.opsForList().rightPush("order:queue", orderJson);
+
+        // fifo
+        redisTemplate.opsForList().rightPush("orderQueue", orderJson);
+
+
     }
 }

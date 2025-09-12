@@ -1,24 +1,12 @@
 spring:
-
   application:
     name: module-order
-
-  datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/orderdb
-    name: finpulse
-    password: finpulse
-
-  jpa:
-    hibernate:
-      ddl-auto: create
-    properties:
-      hibernate:
-        format_sql: true
-    show-sql: true
-    database-platform: org.hibernate.dialect.MariaDBDialect
   main:
     allow-bean-definition-overriding: true
+
+batch:
+    size: 5
+    interval-ms: 5000
 
 server:
   port: 8081

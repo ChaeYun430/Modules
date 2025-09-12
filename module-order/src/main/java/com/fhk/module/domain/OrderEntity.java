@@ -23,6 +23,12 @@ public class OrderEntity {
     private String merchant;
 
     private Long totalAmount;
+
     private String status; // CREATED, PAID, CANCELLED
+
+    @PrePersist
+    protected void prePersist() {
+        this.status = "CREATED";
+    }
 
 }

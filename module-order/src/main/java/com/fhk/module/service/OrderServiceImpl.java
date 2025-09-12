@@ -1,6 +1,14 @@
 package com.fhk.module.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fhk.module.domain.OrderEntity;
+import com.fhk.module.domain.OrderRepository;
+import com.fhk.module.dto.OrderReq;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -8,17 +16,26 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
-    private final KafkaTemplate<String, Object> kafkaTemplate;
+    private final ModelMapper modelMapper;
+    private final OrderRepository orderRepository;
+    private final RedisTemplate<String, String> redisTemplate;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-    // 특정 Partition(주문 ID 기반)만 처리
-/*    @Override
-    @KafkaListener(topicPartitions = @TopicPartition(topic = "inventory-events", partitions = {"1"}))
-    public OrderRes createOrder(OrderReq req) {
 
-        System.out.println("[OrderService] Partition 1 메시지 처리: " + orderId);
+    //주문 저장 & 큐 등록
+    @Transactional
+    public void createOrder(OrderReq orderReq) throws JsonProcessingException {
 
-        // 재고 이벤트 발행
-        kafkaTemplate.send("inventory-events", orderId);
-    }*/
+        OrderEntity savedOder = orderRepository.save(modelMapper.map(orderReq, OrderEntity.class));
+        orderRepository.flush();
+        //JPA에서 save() 후 엔티티는 영속 상태(Managed)로 유지
+        //flush()를 호출하면 DB에 즉시 insert/update 쿼리 실행 → DB-generated 값(auto-increment ID 등)도 엔티티에 반영
+        //즉, 엔티티와 DB 값이 동기화
+        Long orderId = savedOder.getOrderId();
+        String orderJson = objectMapper.writeValueAsString(savedOder);
+        redisTemplate.opsForList().rightPush("orderId:"+orderId, orderJson);
+        // 현재는
+    }
+
 
 }

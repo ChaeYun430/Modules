@@ -1,7 +1,6 @@
 package com.fhk.module.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fhk.module.dto.OrderReq;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
 
     @PostMapping
-    public ResponseEntity<String> createOrder(@RequestBody OrderReq req) throws JsonProcessingException {
+    public ResponseEntity<String> createOrder(@RequestBody OrderReq orderReq) throws JsonProcessingException {
+
+
+
 
         return ResponseEntity.ok("Order received");
     }

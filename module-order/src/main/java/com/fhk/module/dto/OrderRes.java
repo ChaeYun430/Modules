@@ -1,6 +1,10 @@
 package com.fhk.module.dto;
 
+import lombok.Builder;
+import lombok.Getter;
 
+@Getter
+@Builder
 public class OrderRes {
 
     private String orderId;

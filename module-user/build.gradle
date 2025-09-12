@@ -4,6 +4,13 @@ plugins {
 
 dependencies {
 
+    implementation project(':module-core')
+    implementation project(':common-jpa')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
 }
 
 tasks.named('test') {

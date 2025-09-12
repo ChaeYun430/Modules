@@ -9,6 +9,9 @@ import java.util.List;
 @Getter
 public class OrderReq {
 
-    private List<String> itemIds;
+    private String consumer;
 
+    private String merchant;
+
+    private Long totalAmount;
 }
