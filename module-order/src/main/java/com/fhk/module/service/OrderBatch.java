@@ -1,12 +1,15 @@
-package com.fhk.module.event;
+package com.fhk.module.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fhk.module.dto.OrderDTO;
+import com.fhk.outbox.dto.EventDTO;
+import com.fhk.outbox.service.EventPublisher;
+import com.fhk.outbox.constant.AggregateType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -16,17 +19,14 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 @Log4j2
-public class OrderProducer {    //배치 추출 + Kafka 전송
+public class OrderBatch {    //배치 추출 + Kafka 전송
 
     private final RedisTemplate<String, String> redisTemplate;
-    private final KafkaTemplate<String, Object> kafkaTemplate;
+    private final EventPublisher eventPublisher;
     private final ObjectMapper objectMapper;
-
     private final List<NewTopic> newTopics;
 
-
     private final int trafficPoint = 5;
-
 
     //1초마다 5개씩 보낸다.
     @Scheduled(fixedRate = 1000)
@@ -68,9 +68,15 @@ public class OrderProducer {    //배치 추출 + Kafka 전송
     public void produceOrder(List<String> batch) throws JsonProcessingException {
         String orderTopic = newTopics.get(0).name();
         for (String messageJason : batch) {
-            OrderMessage message = objectMapper.readValue(messageJason, OrderMessage.class);
-            kafkaTemplate.send(orderTopic, message.getOrderId(),messageJason);
-            kafkaTemplate.flush();
+            OrderDTO message = objectMapper.readValue(messageJason, OrderDTO.class);
+
+            EventDTO outboxDTO = EventDTO.builder()
+                    .aggregateType(AggregateType.ORDER)
+                    .aggregateId(message.getOrderId())
+                    .topicName(orderTopic)
+                    .payload(messageJason)
+                    .build();
+            eventPublisher.publishEvent(outboxDTO);
         }
     }
 

@@ -22,7 +22,7 @@ public class OrderEntity {
 
     private String merchant;
 
-    private Long totalAmount;
+    private Long amount;
 
     private String status; // CREATED, PAID, CANCELLED
 

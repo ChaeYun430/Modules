@@ -5,7 +5,10 @@ include("common-redis")
 include("common-jpa")
 
 include("module-core")
+include("module-outbox")
+
 include("module-user")
+
 include("module-order")
 include("module-payment")
 include("module-pgclient")

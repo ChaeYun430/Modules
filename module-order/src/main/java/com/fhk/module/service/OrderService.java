@@ -22,7 +22,7 @@ public class OrderService{
     private final ObjectMapper objectMapper = new ObjectMapper();
 
 
-    //주문 저장 & 큐 등록
+    //주문 저장 & 큐 등록 & 이벤트 등록
     @Transactional
     public OrderRes createOrder(OrderReq orderReq) throws JsonProcessingException {
 
@@ -33,9 +33,7 @@ public class OrderService{
         //즉, 엔티티와 DB 값이 동기화
         String orderJson = objectMapper.writeValueAsString(savedOrder);
         redisTemplate.opsForList().rightPush("orderQueue", orderJson);
-
         return  modelMapper.map(savedOrder, OrderRes.class);
     }
-
 
 }

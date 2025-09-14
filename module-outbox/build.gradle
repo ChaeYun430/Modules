@@ -1,15 +1,14 @@
+bootJar { enabled = false }
+jar { enabled = true }
 
 dependencies {
-    implementation project(':common-redis')
+    implementation project(':common-kafka')
     implementation project(':common-jpa')
 
     implementation project(':module-core')
-    implementation project(':module-outbox')
-    implementation project(':module-pgclient')
 
-
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 }
 
