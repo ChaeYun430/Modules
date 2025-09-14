@@ -1,19 +1,19 @@
 package com.fhk.outbox.dto;
 
-import com.fhk.outbox.constant.AggregateType;
+import com.fhk.outbox.constant.OrderStatus;
 import lombok.Builder;
 import lombok.Getter;
 
 @Builder
 @Getter
-public class EventDTO {
+public class EventDTO<T> {
 
-    private AggregateType aggregateType;
+    private OrderStatus aggregateType;
 
     private String aggregateId;
 
     private String topicName;
 
-    private String payload;
+    private T payload;
 
 }

@@ -32,6 +32,7 @@ public class OrderService{
         //flush()를 호출하면 DB에 즉시 insert/update 쿼리 실행 → DB-generated 값(auto-increment ID 등)도 엔티티에 반영
         //즉, 엔티티와 DB 값이 동기화
         String orderJson = objectMapper.writeValueAsString(savedOrder);
+
         redisTemplate.opsForList().rightPush("orderQueue", orderJson);
         return  modelMapper.map(savedOrder, OrderRes.class);
     }

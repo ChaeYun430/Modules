@@ -12,9 +12,6 @@ public class PaymentService {
     private final PaymentRepository paymentRepository;
 
 
-    @KafkaListener(topics = "order-topic", groupId = "payment-group")
-    public void consumeOrder(){
 
-    }
 
 }

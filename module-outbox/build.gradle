@@ -3,6 +3,7 @@ jar { enabled = true }
 
 dependencies {
     implementation project(':common-kafka')
+    implementation project(':common-redis')
     implementation project(':common-jpa')
 
     implementation project(':module-core')

@@ -2,6 +2,7 @@
 dependencies {
     implementation project(':common-redis')
     implementation project(':common-jpa')
+    implementation project(':common-kafka')
 
     implementation project(':module-core')
     implementation project(':module-outbox')

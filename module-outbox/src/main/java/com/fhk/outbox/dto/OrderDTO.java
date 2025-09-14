@@ -1,5 +1,6 @@
-package com.fhk.module.dto;
+package com.fhk.outbox.dto;
 
+import com.fhk.outbox.constant.OrderStatus;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -15,5 +16,5 @@ public class OrderDTO {
 
     private Long amount;
 
-    private String status;
+    private OrderStatus status;
 }

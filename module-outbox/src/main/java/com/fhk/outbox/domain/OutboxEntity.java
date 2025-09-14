@@ -1,7 +1,7 @@
 package com.fhk.outbox.domain;
 
 
-import com.fhk.outbox.constant.AggregateType;
+import com.fhk.outbox.constant.OrderStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,7 +21,7 @@ public class OutboxEntity {
 
     //aggregate는 이벤트를 그룹핑하고, 순서와 일관성을 보장하기 위한 단위
     @Enumerated(EnumType.STRING)
-    private AggregateType aggregateType;
+    private OrderStatus aggregateType;
 
     private String aggregateId;
 

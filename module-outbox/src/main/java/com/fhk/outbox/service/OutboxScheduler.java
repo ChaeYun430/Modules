@@ -14,5 +14,6 @@ public class OutboxScheduler {
     public void processOutbox() {
         outboxService.processPendingEvents(5);  // 최대 5회 재처리
     }
+
 }
 

@@ -1,5 +1,10 @@
 package com.fhk.module.dto;
 
+import lombok.Builder;
+import lombok.Getter;
+
+@Getter
+@Builder
 public class PaymentDTO {
 
     private String paymentId;
