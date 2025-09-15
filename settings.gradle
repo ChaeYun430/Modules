@@ -5,12 +5,14 @@ include("common-redis")
 include("common-jpa")
 
 include("module-core")
-include("module-outbox")
+
+include("event-outbox")
+include("event-worker")
 
 include("module-user")
 
 include("module-order")
 include("module-payment")
-include("module-pgclient")
 include("module-inventory")
 
+include("api-pgclient")

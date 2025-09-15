@@ -5,8 +5,10 @@ dependencies {
     implementation project(':common-kafka')
 
     implementation project(':module-core')
-    implementation project(':module-outbox')
-    implementation project(':module-pgclient')
+
+    implementation project(':event-outbox')
+
+    implementation project(':api-pgclient')
 
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'

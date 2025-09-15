@@ -2,10 +2,10 @@
 dependencies {
     implementation project(':common-redis')
     implementation project(':common-jpa')
+    implementation project(':common-kafka')
 
     implementation project(':module-core')
-    implementation project(':module-outbox')
-    implementation project(':module-pgclient')
+    implementation project(':event-outbox')
 
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
