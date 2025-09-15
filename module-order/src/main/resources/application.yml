@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: module-order
+  config:
+    import: optional:classpath:common-jpa-application.yml
+server:
+  port: 8081
+
+batch:
+  name: orderBatchQueue
+
+
+

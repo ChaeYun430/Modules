@@ -5,12 +5,12 @@ import com.fhk.outbox.domain.OutboxEntity;
 import com.fhk.outbox.dto.EventDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
-@Service
+@Component
 @RequiredArgsConstructor
 public class EventPublisher {
 

@@ -1,8 +1,8 @@
 package com.fhk.worker.order;
 
-import com.fhk.core.dto.PayReq;
-import com.fhk.core.service.InventoryService;
-import com.fhk.core.service.PaymentService;
+import com.fhk.pay.dto.PayReq;
+import com.fhk.inventory.service.InventoryService;
+import com.fhk.pay.service.PaymentService;
 import com.fhk.outbox.constant.OrderStatus;
 import com.fhk.outbox.dto.EventDTO;
 import com.fhk.outbox.dto.OrderDTO;

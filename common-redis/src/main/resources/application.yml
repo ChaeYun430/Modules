@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: common-redis
+  data:
+    redis:
+      timeout: 5000ms
+      cluster:
+        nodes:
+          - 172.28.141.159:7000
+          - 172.28.141.159:7001
+          - 172.28.141.159:7002
+
+server:
+  port: 8092

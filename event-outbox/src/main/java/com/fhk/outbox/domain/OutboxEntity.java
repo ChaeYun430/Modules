@@ -32,7 +32,9 @@ public class OutboxEntity {
     @Column(columnDefinition = "json")
     private String payload;
 
+    @Builder.Default
     private boolean processed = false;
+    @Builder.Default
     private int retryCount = 0;
 
     private LocalDateTime lastAttemptAt;
