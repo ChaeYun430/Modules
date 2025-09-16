@@ -1,9 +1,9 @@
-package com.fhk.order.controller;
+package module.order.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fhk.order.dto.OrderReq;
-import com.fhk.order.dto.OrderRes;
-import com.fhk.order.service.OrderService;
+import module.order.dto.OrderReq;
+import module.order.dto.OrderRes;
+import module.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

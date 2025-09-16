@@ -2,10 +2,10 @@ package com.fhk.core;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@AutoConfiguration
 public class MapperConfig {
 
     @Bean

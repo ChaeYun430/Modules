@@ -1,4 +1,4 @@
-package com.fhk.kafka.config;
+package com.fhk.kafka;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -6,6 +6,7 @@ import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.config.TopicConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Configuration
+@AutoConfiguration
 @EnableKafka
 //@KafkaListener가 붙은 메서드를 Spring이 스캔하고, 백그라운드 Kafka 컨슈머 컨테이너를 생성하도록함.
 //Listener Container가 자동으로 Kafka 브로커와 연결됨

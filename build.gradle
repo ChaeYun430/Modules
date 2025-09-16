@@ -35,7 +35,6 @@ subprojects { // setting.gradle에서 include된 모든 프로젝트에 공통�
 
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter'
-        implementation 'org.modelmapper:modelmapper:3.1.0'
 
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'

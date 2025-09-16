@@ -1,13 +1,14 @@
-package com.fhk.order.service;
+package module.order.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fhk.order.domain.OrderEntity;
-import com.fhk.order.domain.OrderRepository;
-import com.fhk.order.dto.OrderReq;
-import com.fhk.order.dto.OrderRes;
+import module.order.domain.OrderEntity;
+import module.order.repository.OrderRepository;
+import module.order.dto.OrderReq;
+import module.order.dto.OrderRes;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;

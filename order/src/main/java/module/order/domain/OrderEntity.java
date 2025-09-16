@@ -1,4 +1,4 @@
-package com.fhk.order.domain;
+package module.order.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,7 +16,7 @@ public class OrderEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String orderId;
+    private Long orderId;
 
     private String consumer;
 

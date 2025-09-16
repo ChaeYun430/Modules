@@ -1,6 +1,6 @@
 package com.fhk.outbox.service;
 
-import com.fhk.outbox.domain.OutboxRepository;
+import com.fhk.outbox.repository.OutboxRepository;
 import com.fhk.outbox.domain.OutboxEntity;
 import com.fhk.outbox.dto.EventDTO;
 import org.modelmapper.ModelMapper;

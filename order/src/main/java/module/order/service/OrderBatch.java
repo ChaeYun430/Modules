@@ -1,4 +1,4 @@
-package com.fhk.order.service;
+package module.order.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -20,6 +21,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 @Log4j2
+@Import(EventPublisher.class)
 public class OrderBatch {    //배치 추출 + Kafka 전송
 
     private final RedisTemplate<String, String> redisTemplate;

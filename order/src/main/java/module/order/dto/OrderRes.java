@@ -1,4 +1,4 @@
-package com.fhk.order.dto;
+package module.order.dto;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -1,6 +1,5 @@
 package com.fhk.outbox.domain;
 
-
 import com.fhk.outbox.constant.OrderStatus;
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@Table(name = "outbox") //이벤트 타입 분기 가능 -> unique 키 x
+@Table(name = "outbox_table") //이벤트 타입 분기 가능 -> unique 키 x
 public class OutboxEntity {
 
     @Id
@@ -25,7 +24,6 @@ public class OutboxEntity {
 
     private String aggregateId;
 
-    @Enumerated(EnumType.STRING)
     private String topicName;
 
     //JPA에서 특정 필드가 DB에 저장될 때 직접적인 SQL 타입 정의를 해주고 싶은 경우

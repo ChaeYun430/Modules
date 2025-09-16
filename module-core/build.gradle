@@ -1,6 +1,9 @@
 bootJar { enabled = false }
 jar { enabled = true }
 
+dependencies {
+    api 'org.modelmapper:modelmapper:3.1.0'
+}
 //순수 Java JAR 빌드
 //소스 클래스 + 리소스만 포함
 //Spring Boot 실행용 main class, dependency는 포함 안 함
