@@ -1,6 +1,7 @@
-package com.fhk.worker;
+package com.fhk.order.event;
 
 import com.fhk.outbox.dto.OrderDTO;
+import com.fhk.worker.OrderWorker;
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.data.redis.core.RedisTemplate;

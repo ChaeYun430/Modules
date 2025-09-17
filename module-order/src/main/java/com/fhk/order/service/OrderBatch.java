@@ -32,7 +32,7 @@ public class OrderBatch {    //배치 추출 + Kafka 전송
     @Value("${batch.name}")
     private String redisKey;
 
-    private final int trafficPoint = 5;
+    private final int trafficPoint = 1;
 
 
     //1초마다 5개씩 보낸다.

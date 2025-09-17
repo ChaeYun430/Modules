@@ -20,7 +20,7 @@ public class OrderWorker {
     private final PaymentService paymentService;
     private final InventoryService inventoryService;
 
-    synchronized void processPaymentQueue(String queueKey, String orderId, OrderDTO message) {
+    public void processPaymentQueue(String queueKey, String orderId, OrderDTO message) {
 
         //FIFO 추출
         while ((message = redisTemplate.opsForList().leftPop(queueKey)) != null) {

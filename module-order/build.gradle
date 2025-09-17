@@ -9,7 +9,7 @@ dependencies {
     implementation project(':module-core')
 
     implementation project(':event-outbox')
-
+    implementation project(':event-worker')
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
 }

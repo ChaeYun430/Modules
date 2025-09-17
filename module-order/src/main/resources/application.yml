@@ -33,7 +33,7 @@ spring:
           - ${REDIS_NODE_5:172.28.141.159:7005}
 
   kafka:
-    bootstrap-servers: ${KAFKA_BROKERS:127.0.0.1:9092}
+    bootstrap-servers: ${KAFKA_BROKERS:localhost:9092}
     consumer:
       group-id: ${KAFKA_CONSUMER_GROUP:payment-group}
       auto-offset-reset: earliest
@@ -50,10 +50,11 @@ spring:
 
 logging:
   level:
-    org:
-      springframework: info
-    com:
-      fhk: debug
+    org.apache.kafka: DEBUG
+    org.springframework.kafka: DEBUG
+    org.springframework.data.redis: DEBUG
+    org.springframework: info
+    com.fhk: DEBUG
 
 batch:
   name: ${BATCH_NAME:orderBatchQueue}
