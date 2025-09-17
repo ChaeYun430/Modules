@@ -10,7 +10,7 @@ include("event-outbox")
 include("event-worker")
 
 include("module-user")
-include("order")
+include("module-order")
 include("module-payment")
 include("module-inventory")
 

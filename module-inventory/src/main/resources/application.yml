@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: module-inventory
+
+
+server:
+  port: 8082

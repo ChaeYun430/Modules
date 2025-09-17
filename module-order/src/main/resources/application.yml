@@ -1,0 +1,62 @@
+server:
+  port: ${SERVER_PORT:8081}
+
+spring:
+  application:
+    name: module-order
+
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: ${SPRING_DATASOURCE_URL:jdbc:mariadb://localhost:3306/finpulse}
+    username: ${SPRING_DATASOURCE_USERNAME:finpulse}
+    password: ${SPRING_DATASOURCE_PASSWORD:finpulse}
+
+  jpa:
+    hibernate:
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: ${SPRING_JPA_SHOW_SQL:true}
+    database-platform: org.hibernate.dialect.MariaDBDialect
+
+  data:
+    redis:
+      timeout: 5000ms
+      cluster:
+        nodes:
+          - ${REDIS_NODE_0:172.28.141.159:7000}
+          - ${REDIS_NODE_1:172.28.141.159:7001}
+          - ${REDIS_NODE_2:172.28.141.159:7002}
+          - ${REDIS_NODE_3:172.28.141.159:7003}
+          - ${REDIS_NODE_4:172.28.141.159:7004}
+          - ${REDIS_NODE_5:172.28.141.159:7005}
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BROKERS:127.0.0.1:9092}
+    consumer:
+      group-id: ${KAFKA_CONSUMER_GROUP:payment-group}
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      enable-auto-commit: false
+    listener:
+      ack-mode: record
+      concurrency: 3
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      #transaction-id-prefix: ${SPRING_KAFKA_PRODUCER_TX_PREFIX:}
+
+logging:
+  level:
+    org:
+      springframework: info
+    com:
+      fhk: debug
+
+batch:
+  name: ${BATCH_NAME:orderBatchQueue}
+
+
+
