@@ -2,7 +2,7 @@ package com.fhk.outbox.service;
 
 import com.fhk.outbox.repository.OutboxRepository;
 import com.fhk.outbox.domain.OutboxEntity;
-import com.fhk.outbox.dto.EventDTO;
+import com.fhk.core.dto.EventDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;

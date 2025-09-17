@@ -1,7 +1,7 @@
 package com.fhk.redis;
 
+import com.fhk.core.dto.OrderDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,28 +14,25 @@ import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSeriali
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
-@EnableConfigurationProperties(CommonRedisProperties.class)
+@EnableConfigurationProperties(RedisClusterProperties.class)
 @RequiredArgsConstructor
 public class RedisConfig {
 
-    private final CommonRedisProperties properties;
+    private final RedisClusterProperties properties;
 
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
 
-        if (!properties.getClusterNodes().isEmpty()) {
-
             return new LettuceConnectionFactory(
-                    new RedisClusterConfiguration(properties.getClusterNodes())
+                    new RedisClusterConfiguration(properties.getCluster().getNodes())
             );
 
-        }
-        return new LettuceConnectionFactory(properties.getHost(), properties.getPort());
     }
 
     @Bean
-    public RedisTemplate<?, ?> redisTemplate(RedisConnectionFactory factory) {
-        RedisTemplate<?, ?> template = new RedisTemplate<>();
+    @Primary
+    public RedisTemplate<String, Object> objectRedisTemplate(RedisConnectionFactory factory) {
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(factory);
 
         template.setKeySerializer(new StringRedisSerializer());
@@ -45,4 +42,19 @@ public class RedisConfig {
         template.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
         return template;
     }
+
+    @Bean
+    public RedisTemplate<String, OrderDTO> orderRedisTemplate(RedisConnectionFactory factory) {
+        RedisTemplate<String, OrderDTO> template = new RedisTemplate<>();
+        template.setConnectionFactory(factory);
+
+        template.setKeySerializer(new StringRedisSerializer());
+        template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+
+        template.setHashKeySerializer(new StringRedisSerializer());
+        template.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
+        return template;
+    }
+
+
 }

@@ -10,7 +10,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,7 +19,7 @@ public class OrderService{
 
     private final ModelMapper modelMapper;
     private final OrderRepository orderRepository;
-    private final RedisTemplate<String, String> redisTemplate;
+    private final StringRedisTemplate stringRedisTemplate;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
 
@@ -34,7 +34,7 @@ public class OrderService{
         //즉, 엔티티와 DB 값이 동기화
         String orderJson = objectMapper.writeValueAsString(savedOrder);
 
-        redisTemplate.opsForList().rightPush("orderQueue", orderJson);
+        stringRedisTemplate.opsForList().rightPush("orderQueue", orderJson);
 
         return  modelMapper.map(savedOrder, OrderRes.class);
     }

@@ -1,6 +1,6 @@
 package com.fhk.outbox.domain;
 
-import com.fhk.outbox.constant.OrderStatus;
+import com.fhk.core.constant.OrderStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
