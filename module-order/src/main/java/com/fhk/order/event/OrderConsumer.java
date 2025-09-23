@@ -15,7 +15,8 @@ public class OrderConsumer {
     private final RedisTemplate<String, Object> objectRedisTemplate;
     private final OrderWorker orderWorker;
 
-    @KafkaListener(topics = "order-topic", groupId = "payment-group", containerFactory = "paymentFactory")
+    //컨슈머 그룹내 컨슈머 지정 설정 미완
+    @KafkaListener(topics = "order-topic", groupId = "payment-group")
     public void paymentConsumeOrder(ConsumerRecord<String, OrderDTO> record) {
         consumeOrder(record);
     }
