@@ -15,18 +15,13 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
 @EnableConfigurationProperties(RedisClusterProperties.class)
-@RequiredArgsConstructor
 public class RedisConfig {
 
-    private final RedisClusterProperties properties;
-
     @Bean
-    public RedisConnectionFactory redisConnectionFactory() {
-
+    public RedisConnectionFactory redisConnectionFactory(RedisClusterProperties properties) {
             return new LettuceConnectionFactory(
                     new RedisClusterConfiguration(properties.getCluster().getNodes())
             );
-
     }
 
     @Bean
