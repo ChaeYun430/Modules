@@ -71,7 +71,7 @@ public class KafkaConfig {
     }
 
     // ---------------- Topic ----------------
-    @Bean
+/*    @Bean
     public List<NewTopic> topics() {
         return List.of(
                 TopicBuilder.name("order-topic")
@@ -83,5 +83,5 @@ public class KafkaConfig {
                 TopicBuilder.name("accounting-topic").partitions(3).replicas(1).build(),
                 TopicBuilder.name("notification-topic").partitions(3).replicas(1).build()
         );
-    }
+    }*/
 }
