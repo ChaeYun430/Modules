@@ -35,21 +35,22 @@ spring:
   kafka:
     bootstrap-servers: ${KAFKA_BROKERS:localhost:9092}
     consumer:
-      #group-id: ${KAFKA_CONSUMER_GROUP:payment-group}
+      group-id: ${KAFKA_CONSUMER_GROUP:payment-group}
       auto-offset-reset: earliest
+      auto-startup: false
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      enable-auto-commit: false
-      properties:
-        enable-metrics-push: false
-    listener:
-      ack-mode: record
-      concurrency: 3
+     ## enable-auto-commit: false
+      #properties:
+      #  enable-metrics-push: false
+    #listener:
+      #ack-mode: record
+      #concurrency: 3
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
-      properties:
-        enable-metrics-push: false
+      #properties:
+      #  enable-metrics-push: false
       #transaction-id-prefix: ${SPRING_KAFKA_PRODUCER_TX_PREFIX:}
 
 logging:

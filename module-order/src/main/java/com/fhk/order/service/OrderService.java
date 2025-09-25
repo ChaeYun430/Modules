@@ -2,6 +2,8 @@ package com.fhk.order.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fhk.order.domain.OrderEntity;
 import com.fhk.order.repository.OrderRepository;
 import com.fhk.order.dto.OrderReq;
@@ -32,6 +34,9 @@ public class OrderService{
         //JPA에서 save() 후 엔티티는 영속 상태(Managed)로 유지
         //flush()를 호출하면 DB에 즉시 insert/update 쿼리 실행 → DB-generated 값(auto-increment ID 등)도 엔티티에 반영
         //즉, 엔티티와 DB 값이 동기화
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
         String orderJson = objectMapper.writeValueAsString(savedOrder);
 
         stringRedisTemplate.opsForList().rightPush("orderQueue", orderJson);

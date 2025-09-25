@@ -11,5 +11,5 @@ public class OrderReq {
 
     private String merchant;
 
-    private Long totalAmount;
+    private Long amount;
 }

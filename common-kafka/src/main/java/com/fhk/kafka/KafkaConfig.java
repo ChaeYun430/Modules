@@ -26,6 +26,9 @@ import java.util.Map;
 @EnableKafka
 public class KafkaConfig {
 
+    
+
+
     // ---------------- Producer ----------------
     @Bean
     public ProducerFactory<String, Object> producerFactory(KafkaProperties props) {

@@ -9,7 +9,8 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-core:2.16.0'
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.16.0'
 
-    api 'org.springframework.kafka:spring-kafka'
+    api 'org.springframework.kafka:spring-kafka:3.3.3'
+    api 'org.apache.kafka:kafka-clients:3.7.0'
     testImplementation 'org.springframework.kafka:spring-kafka-test'
 
 }

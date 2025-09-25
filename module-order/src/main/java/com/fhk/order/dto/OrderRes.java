@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Getter
 @Builder
 @NoArgsConstructor
@@ -13,9 +15,9 @@ public class OrderRes {
 
     private String orderId;
 
-    private String userId;
+    private String consumer;
 
-    private String orderDate;
+    private LocalDate orderDate;
 
     private String orderStatus;
 
