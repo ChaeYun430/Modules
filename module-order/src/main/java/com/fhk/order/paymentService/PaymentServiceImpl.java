@@ -1,5 +1,6 @@
 package com.fhk.order.paymentService;
 
+import com.fhk.core.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class PaymentService {
+public class PaymentServiceImpl implements PaymentService {
 
 
 

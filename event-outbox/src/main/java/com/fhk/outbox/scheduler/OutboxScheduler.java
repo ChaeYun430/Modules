@@ -1,4 +1,4 @@
-package com.fhk.outbox.service;
+package com.fhk.outbox.scheduler;
 
 import com.fhk.core.service.EventPublisher;
 import org.springframework.scheduling.annotation.Scheduled;

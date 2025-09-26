@@ -1,11 +1,6 @@
 dependencies {
 
-    implementation project(":common-kafka")
-    implementation project(":common-redis")
-
     implementation project(":module-core")
-
     implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
-
 
 }

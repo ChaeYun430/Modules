@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fhk.core.dto.OrderDTO;
 import com.fhk.core.dto.EventDTO;
+import com.fhk.core.service.EventPublisher;
 import com.fhk.outbox.service.EventPublisher;
 import com.fhk.core.constant.OrderStatus;
 import lombok.RequiredArgsConstructor;

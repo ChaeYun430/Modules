@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fhk.core.service.OrderService;
 import com.fhk.order.domain.OrderEntity;
 import com.fhk.order.repository.OrderRepository;
 import com.fhk.order.dto.OrderReq;
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class OrderService{
+public class OrderServiceImpl implements OrderService {
 
     private final ModelMapper modelMapper;
     private final ObjectMapper objectMapper;

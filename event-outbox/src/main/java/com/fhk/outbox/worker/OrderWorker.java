@@ -1,4 +1,4 @@
-package com.fhk.order.paymentService;
+package com.fhk.outbox.worker;
 
 import com.fhk.core.constant.OrderStatus;
 import com.fhk.core.dto.EventDTO;

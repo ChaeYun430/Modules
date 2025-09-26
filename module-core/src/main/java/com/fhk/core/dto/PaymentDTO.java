@@ -1,4 +1,4 @@
-package com.fhk.order.paymentService;
+package com.fhk.core.dto;
 
 import lombok.Builder;
 import lombok.Getter;
