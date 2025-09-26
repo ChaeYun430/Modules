@@ -1,0 +1,14 @@
+dependencies {
+
+    implementation project(":common-kafka")
+    implementation project(":common-kafka")
+
+    implementation project(":module-core")
+    implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
+
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

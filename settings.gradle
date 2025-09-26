@@ -8,4 +8,4 @@ include("module-core")
 include("event-outbox")
 
 include("module-order")
-
+include("module-search")

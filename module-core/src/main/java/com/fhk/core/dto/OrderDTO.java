@@ -1,6 +1,5 @@
 package com.fhk.core.dto;
 
-
 import com.fhk.core.constant.OrderStatus;
 import lombok.Builder;
 import lombok.Getter;

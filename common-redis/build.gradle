@@ -5,6 +5,5 @@ dependencies {
 
     implementation project(":module-core")
     api 'org.springframework.boot:spring-boot-starter-data-redis'
-    api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.19.2'
 
 }

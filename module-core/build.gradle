@@ -2,7 +2,14 @@ bootJar { enabled = false }
 jar { enabled = true }
 
 dependencies {
+
     api 'org.modelmapper:modelmapper:3.1.0'
+
+    api 'com.fasterxml.jackson.core:jackson-databind:2.16.0'
+    api 'com.fasterxml.jackson.core:jackson-core:2.16.0'
+    api 'com.fasterxml.jackson.core:jackson-annotations:2.16.0'
+    api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.19.2'
+
 }
 //순수 Java JAR 빌드
 //소스 클래스 + 리소스만 포함

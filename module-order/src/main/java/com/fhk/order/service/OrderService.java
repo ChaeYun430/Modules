@@ -20,28 +20,39 @@ import org.springframework.stereotype.Service;
 public class OrderService{
 
     private final ModelMapper modelMapper;
+    private final ObjectMapper objectMapper;
     private final OrderRepository orderRepository;
     private final StringRedisTemplate stringRedisTemplate;
-    private final ObjectMapper objectMapper = new ObjectMapper();
 
+    //JPA에서 save() 후 엔티티는 영속 상태(Managed)로 유지 / 즉, 엔티티와 DB 값이 동기화
+    //flush()를 호출하면 DB에 즉시 insert/update 쿼리 실행 → DB-generated 값(auto-increment ID 등)도 엔티티에 반영
 
     //주문 저장 & 큐 등록 & 이벤트 등록
     @Transactional
     public OrderRes createOrder(OrderReq orderReq) throws JsonProcessingException {
-
         OrderEntity savedOrder = orderRepository.save(modelMapper.map(orderReq, OrderEntity.class));
         orderRepository.flush();
-        //JPA에서 save() 후 엔티티는 영속 상태(Managed)로 유지
-        //flush()를 호출하면 DB에 즉시 insert/update 쿼리 실행 → DB-generated 값(auto-increment ID 등)도 엔티티에 반영
-        //즉, 엔티티와 DB 값이 동기화
-        objectMapper.registerModule(new JavaTimeModule());
-        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
         String orderJson = objectMapper.writeValueAsString(savedOrder);
-
         stringRedisTemplate.opsForList().rightPush("orderQueue", orderJson);
-
         return  modelMapper.map(savedOrder, OrderRes.class);
+    }
+
+
+    public OrderRes updateOrder(String orderId, OrderReq orderReq) throws JsonProcessingException {
+        return null;
+    }
+
+    public OrderRes deleteOrder(String orderId) throws JsonProcessingException {
+        return null;
+    }
+
+    public OrderRes getOrder(String orderId) throws JsonProcessingException {
+        return null;
+    }
+
+    public OrderRes getAllOrders() throws JsonProcessingException {
+        return null;
     }
 
 }
