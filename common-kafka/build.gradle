@@ -2,11 +2,8 @@ bootJar { enabled = false }
 jar { enabled = true }
 
 dependencies {
-
-    implementation project(":module-core")
-
     api 'org.springframework.kafka:spring-kafka:3.3.3'
     api 'org.apache.kafka:kafka-clients:3.7.0'
-    testImplementation 'org.springframework.kafka:spring-kafka-test'
 
+    testImplementation 'org.springframework.kafka:spring-kafka-test'
 }

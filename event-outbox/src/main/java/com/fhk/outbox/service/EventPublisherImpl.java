@@ -2,6 +2,7 @@ package com.fhk.outbox.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fhk.core.service.EventPublisher;
 import com.fhk.outbox.repository.OutboxRepository;
 import com.fhk.outbox.domain.OutboxEntity;
 import com.fhk.core.dto.EventDTO;
@@ -16,7 +17,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 @Log4j2
-public class EventPublisher {
+public class EventPublisherImpl implements EventPublisher {
 
     private final OutboxRepository outboxRepository;
     private final KafkaTemplate<String, Object> kafkaTemplate;
