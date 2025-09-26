@@ -26,9 +26,6 @@ import java.util.Map;
 @EnableKafka
 public class KafkaConfig {
 
-    
-
-
     // ---------------- Producer ----------------
     @Bean
     public ProducerFactory<String, Object> producerFactory(KafkaProperties props) {
@@ -46,35 +43,28 @@ public class KafkaConfig {
 
     // ---------------- Consumer ----------------
     @Bean
-    public ConsumerFactory<String, Object> consumerFactory(KafkaProperties props) {
+    public ConcurrentKafkaListenerContainerFactory<String, Object> paymentGroupFactory(KafkaProperties props) {
+        // 기존 baseConsumerFactory를 쓰지 않고 새 맵을 생성
+        Map<String, Object> consumerProps = new HashMap<>(props.buildConsumerProperties());
+        consumerProps.put(ConsumerConfig.GROUP_ID_CONFIG, "payment-group");
+
         JsonDeserializer<Object> deserializer = new JsonDeserializer<>(Object.class);
-        deserializer.addTrustedPackages("*"); // 모든 패키지 허용
+        deserializer.addTrustedPackages("*");
 
-        Map<String, Object> config = new HashMap<>(props.buildConsumerProperties());
-        config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, deserializer);
-        // 서비스 모듈에서 groupId 주입
-        return new DefaultKafkaConsumerFactory<>(config, new StringDeserializer(), deserializer);
-    }
+        ConsumerFactory<String, Object> consumerFactory =
+                new DefaultKafkaConsumerFactory<>(consumerProps, new StringDeserializer(), deserializer);
 
-    @Bean
-    @ConditionalOnMissingBean
-    public ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory(
-            ConsumerFactory<String, Object> consumerFactory
-    ) {
-        ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        ConcurrentKafkaListenerContainerFactory<String, Object> factory =
+                new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory);
-
-        // 순서 보장을 위해 필요하면 concurrency=1
         factory.setConcurrency(1);
         factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
-
-        // Key 기반 순서 보장 시 파티션 지정 (Spring Kafka가 자동 관리)
         return factory;
     }
 
+
     // ---------------- Topic ----------------
-/*    @Bean
+   @Bean
     public List<NewTopic> topics() {
         return List.of(
                 TopicBuilder.name("order-topic")
@@ -86,5 +76,5 @@ public class KafkaConfig {
                 TopicBuilder.name("accounting-topic").partitions(3).replicas(1).build(),
                 TopicBuilder.name("notification-topic").partitions(3).replicas(1).build()
         );
-    }*/
+    }
 }

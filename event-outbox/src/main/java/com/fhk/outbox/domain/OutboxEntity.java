@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@ToString
 @Table(name = "outbox_table") //이벤트 타입 분기 가능 -> unique 키 x
 public class OutboxEntity {
 
@@ -43,6 +44,7 @@ public class OutboxEntity {
         this.lastAttemptAt = LocalDateTime.now();
         return this;
     }
+
     public OutboxEntity failPendingEvent(){
         this.retryCount++;
         this.lastAttemptAt = LocalDateTime.now();

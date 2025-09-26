@@ -35,6 +35,7 @@ public class OrderBatch {    //배치 추출 + Kafka 전송
     private final int trafficPoint = 1;
 
 
+/*
     //1초마다 5개씩 보낸다.
     @Scheduled(fixedRate = 1000)
     public void batchBySize() throws JsonProcessingException {
@@ -54,21 +55,30 @@ public class OrderBatch {    //배치 추출 + Kafka 전송
         // 처리 후 Redis에서 제거
         stringRedisTemplate.opsForList().trim(redisKey, queueSize, queueSize-1);
     }
+*/
 
 
     //5분마다 얼마나?? 다 지울 수는 없잖음...
-    @Scheduled(cron = "0 0/5 * * * *")
+    @Scheduled(cron = "0/5 * * * * *")
     public void batchByPeriod() throws JsonProcessingException {
+        log.info("enter OrderBatch");
         List<String> batch = new ArrayList<>();
         Long queueSize = stringRedisTemplate.opsForList().size(redisKey);
-        if (queueSize == null || queueSize == 0) return;
+        if (queueSize == null || queueSize == 0) {
+            log.info("enter OrderBatch - queue size is 0");
+            return;
+        }
         for (int i = 0; i < queueSize; i++) {
+            log.info("enter OrderBatch for(){}");
             String messageJason = stringRedisTemplate.opsForList().leftPop(redisKey);
             batch.add(messageJason);
         }
+        log.info("enter OrderBatch to publish");
         produceOrder(batch);
         // 처리 후 Redis 비우기
+        log.info("enter OrderBatch - to delete");
         stringRedisTemplate.delete(redisKey);
+        log.info("enter OrderBatch - deleted");
     }
 
 
@@ -83,6 +93,7 @@ public class OrderBatch {    //배치 추출 + Kafka 전송
                     .topicName(orderTopic)
                     .payload(message)
                     .build();
+
             eventPublisher.publishEvent(outboxDTO);
         }
     }
