@@ -10,6 +10,7 @@ dependencies {
     api 'com.fasterxml.jackson.core:jackson-annotations:2.16.0'
     api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.19.2'
 
+    api 'org.springframework.boot:spring-boot-starter-web'
 }
 //순수 Java JAR 빌드
 //소스 클래스 + 리소스만 포함

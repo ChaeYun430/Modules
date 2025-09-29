@@ -1,0 +1,21 @@
+spring:
+
+  application:
+    name: module-payment
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/paymentdb
+    name: finpulse
+    password: finpulse
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+    database-platform: org.hibernate.dialect.MariaDBDialect
+
+server:
+  port: 8083

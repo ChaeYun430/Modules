@@ -10,14 +10,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @EnableJpaAuditing
 @SpringBootApplication(scanBasePackages = "com.fhk.order")
-@EntityScan(basePackages = {
-        "com.fhk.order.domain",
-        "com.fhk.outbox.domain",
-})
-@EnableJpaRepositories(basePackages = {
-        "com.fhk.order.repository",
-        "com.fhk.outbox.repository",
-})
+@EntityScan(basePackages = {"com.fhk.order.domain"})
+@EnableJpaRepositories(basePackages = {"com.fhk.order.repository"})
 public class ModuleOrderApplication {
 
     public static void main(String[] args) {

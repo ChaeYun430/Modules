@@ -1,0 +1,23 @@
+plugins {
+    id 'org.springframework.boot' version '3.5.5'
+}
+
+ext {
+    queryDslVersion = "5.0.0"
+}
+
+dependencies {
+    implementation project(':module-core')
+    implementation project(':common-kafka')
+    implementation project(':common-redis')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+    testImplementation 'io.projectreactor:reactor-test'
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

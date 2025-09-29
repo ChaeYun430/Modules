@@ -9,3 +9,10 @@ include("event-outbox")
 
 include("module-order")
 include("module-search")
+include("module-notification")
+include("module-payment")
+include("module-inventory")
+include("module-product")
+include("api-pgclient")
+
+
